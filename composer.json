@@ -1,0 +1,12 @@
+{
+    "name": "januszhou/emagid-email",
+    "authors": [
+        {
+            "name": "Janus",
+            "email": "janus.zhou1005@gmail.com"
+        }
+    ],
+    "require": {
+        "mandrill/mandrill": "^1.0"
+    }
+}
