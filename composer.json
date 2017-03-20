@@ -1,5 +1,6 @@
 {
     "name": "januszhou/emagid-email",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Janus",
@@ -7,6 +8,12 @@
         }
     ],
     "require": {
+        "php": ">=5.3.3",
         "mandrill/mandrill": "^1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "EmagidService": "src/"
+        }
     }
 }

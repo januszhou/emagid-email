@@ -19,7 +19,8 @@ namespace EmagidService;
  *  ->setTemplate('marketing-campaign')
  *  ->send();
  */
-class MailMaster{
+class MailMaster implements MailMasterInterface
+{
     private $mandrill;
     private $fromAddress;
     private $fromName;
@@ -141,6 +142,14 @@ class MailMaster{
             echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
             throw $e;
         }
+
+    }
+
+    /**
+     * @param $html
+     */
+    public function setHtml($html)
+    {
 
     }
 
