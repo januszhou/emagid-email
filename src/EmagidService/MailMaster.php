@@ -31,6 +31,7 @@ class MailMaster implements MailMasterInterface
     private $subject;
     private $template;
     private $mergelanguage = 'mailchimp';
+    private $html;
 
     private $defaultCC = [];
 
@@ -106,12 +107,20 @@ class MailMaster implements MailMasterInterface
         return $this;
     }
 
+    /**
+     * @param $template
+     * @return $this
+     */
     public function setTemplate($template)
     {
         $this->template = $template;
         return $this;
     }
 
+    /**
+     * @param $mergelanguage
+     * @return $this
+     */
     public function setMergeLanguage($mergelanguage)
     {
         $this->mergelanguage = $mergelanguage;
@@ -136,7 +145,11 @@ class MailMaster implements MailMasterInterface
 
         $ipPool = 'Main Pool';
         try {
-            return $this->mandrill->messages->sendTemplate($this->template, [], $message, $async, $ipPool);
+            if($this->html){
+                return $this->mandrill->messages->send(array_merge($message, ['html' => $this->html]), $async, $ipPool);
+            } else {
+                return $this->mandrill->messages->sendTemplate($this->template, [], $message, $async, $ipPool);
+            }
         } catch(\Mandrill_Error $e) {
             // Mandrill errors are thrown as exceptions
             echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
@@ -147,10 +160,12 @@ class MailMaster implements MailMasterInterface
 
     /**
      * @param $html
+     * @return $this
      */
     public function setHtml($html)
     {
-
+        $this->html = $html;
+        return $this;
     }
 
     private function formatMergeTags()

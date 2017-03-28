@@ -59,5 +59,7 @@ interface MailMasterInterface
 
     public function setMergeLanguage($mergelanguage);
 
+    public function setHtml($html);
+
     public function send();
 }
